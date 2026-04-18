@@ -63,7 +63,9 @@ jobs:
       - name: Build and push Docker image
         id: meta
         run: |
-          IMAGE="ghcr.io/${{ github.repository_owner }}/${IMAGE_NAME}"
+          # Convert repository owner to lowercase for the image path
+          REPO_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          IMAGE="ghcr.io/${REPO_OWNER}/${IMAGE_NAME}"
           TAG="${IMAGE}:${{ github.run_number }}"
           LATEST="${IMAGE}:latest"
 
@@ -108,7 +110,9 @@ jobs:
         env:
           IMAGE: ${{ needs.build-and-push.outputs.image }}
         run: |
-          REGISTRY="ghcr.io/${{ github.repository_owner }}"
+          # Convert repository owner to lowercase for the registry path
+          REPO_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          REGISTRY="ghcr.io/${REPO_OWNER}"
           sed -i "s|REGISTRY_PLACEHOLDER|${REGISTRY}|g" \
             scenarios/01-crashloop-bad-config/k8s/deployment.yaml
 
