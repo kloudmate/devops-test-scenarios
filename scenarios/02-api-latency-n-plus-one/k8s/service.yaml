@@ -1,16 +1,12 @@
----
 apiVersion: v1
 kind: Service
 metadata:
   name: scenario-02-n-plus-one
-  namespace: default
-  labels:
-    scenario: "02-api-latency-n-plus-one"
+  namespace: test-scenerios
 spec:
+  type: LoadBalancer
   selector:
     app: scenario-02
   ports:
     - port: 80
       targetPort: 3000
-      protocol: TCP
-  type: ClusterIP

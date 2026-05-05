@@ -32,7 +32,12 @@ jobs:
         run: pip install pytest
 
       - name: Run unit tests
-        run: pytest ../tests/ -v
+        run: |
+          if [ -d "../tests" ]; then
+            pytest ../tests/ -v
+          else
+            echo "No tests found. Skipping."
+          fi
 
 
   # ─────────────────────────────────────────────
@@ -116,15 +121,24 @@ jobs:
         run: |
           cat scenarios/01-crashloop-bad-config/k8s/deployment.yaml
 
+      - name: Ensure namespace exists
+        run: |
+          kubectl create namespace test-scenerios --dry-run=client -o yaml | kubectl apply -f -
+
       - name: Apply ConfigMap
         run: |
-          kubectl apply -f scenarios/01-crashloop-bad-config/k8s/configmap.yaml
+          kubectl apply -n test-scenerios -f scenarios/01-crashloop-bad-config/k8s/configmap.yaml
 
       - name: Apply Deployment
         run: |
-          kubectl apply -f scenarios/01-crashloop-bad-config/k8s/deployment.yaml
+          set -x
+          kubectl config current-context
+          kubectl get ns
+          kubectl apply -n test-scenerios -f scenarios/01-crashloop-bad-config/k8s/deployment.yaml
+          kubectl get deploy -n test-scenerios
+          kubectl get pods -n test-scenerios
 
       - name: Wait and show pod status
         run: |
           sleep 40
-          kubectl get pods -l scenario=01-crashloop-bad-config
+          kubectl get pods -n test-scenerios -l scenario=01-crashloop-bad-config

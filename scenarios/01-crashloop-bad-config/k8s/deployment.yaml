@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: scenario-01-crashloop
-  namespace: default
+  namespace: test-scenerios
   labels:
     scenario: "01-crashloop-bad-config"
     app: scenario-01
@@ -22,7 +22,7 @@ spec:
         - name: app
           # Image is built by the GitHub Actions workflow and pushed to Artifact Registry.
           # The workflow substitutes the full image path at deploy time.
-          image: REGISTRY_PLACEHOLDER/scenario-01-crashloop-bad-config:latest
+          image: ghcr.io/gorangbhati/scenario-01-crashloop-bad-config:latest
           ports:
             - containerPort: 8080
           envFrom:
