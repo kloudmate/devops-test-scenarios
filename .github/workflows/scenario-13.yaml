@@ -109,8 +109,8 @@ jobs:
 
       - name: Ensure namespace exists
         run: |
-          kubectl create namespace ${NAMESPACE} --dry-run=client -o yaml | kubectl apply -f -
-
+          kubectl create namespace ${NAMESPACE} --dry-run=client -o yaml | kubectl apply --validate=false -f -
+          
       - name: Substitute registry in deployment manifest
         run: |
           REGISTRY="ghcr.io/${{ github.repository_owner }}"
