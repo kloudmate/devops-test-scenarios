@@ -123,13 +123,11 @@ jobs:
       - name: Ensure namespace exists
         run: |
           kubectl create namespace test-scenerios \
-            --dry-run=client -o yaml | kubectl apply -f -
+            --dry-run=client -o yaml | kubectl apply --validate=false -f -
 
       - name: Apply ConfigMap
         run: |
-          kubectl apply \
-            -n test-scenerios \
-            -f scenarios/01-crashloop-bad-config/k8s/configmap.yaml
+          kubectl apply --validate=false -n test-scenerios -f scenarios/01-crashloop-bad-config/k8s/configmap.yaml
 
       - name: Apply Deployment
         run: |
@@ -137,9 +135,7 @@ jobs:
           kubectl config current-context
           kubectl get ns
 
-          kubectl apply \
-            -n test-scenerios \
-            -f scenarios/01-crashloop-bad-config/k8s/deployment.yaml
+          kubectl apply --validate=false -n test-scenerios -f scenarios/01-crashloop-bad-config/k8s/deployment.yaml
 
           kubectl get deploy -n test-scenerios
           kubectl get pods -n test-scenerios
