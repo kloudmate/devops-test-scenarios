@@ -100,7 +100,7 @@ jobs:
 
       - name: Deploy scenario
         run: |
-          kubectl apply -f scenarios/16-background-goroutine-panic/k8s/
+          kubectl apply --validate=false -f scenarios/16-background-goroutine-panic/k8s/
 
       - name: Show pods
         run: |
