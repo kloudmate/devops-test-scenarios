@@ -118,8 +118,8 @@ jobs:
 
       - name: Deploy application
         run: |
-          kubectl apply -n ${NAMESPACE} -f scenarios/13-hpa-not-scaling/k8s/deployment.yaml
-          kubectl apply -n ${NAMESPACE} -f scenarios/13-hpa-not-scaling/k8s/hpa.yaml
+          kubectl apply --validate=false -n ${NAMESPACE} -f scenarios/13-hpa-not-scaling/k8s/deployment.yaml
+          kubectl apply --validate=false -n ${NAMESPACE} -f scenarios/13-hpa-not-scaling/k8s/hpa.yaml
 
       - name: Show deployment and HPA
         run: |
