@@ -80,7 +80,7 @@ jobs:
   # Job 3: Deploy to OVH
   # ──────────────────────────────────────────
   deploy:
-    name: Deploy to GKE
+    name: Deploy to OVH
     runs-on: ubuntu-latest
     needs: build-and-push
     
