@@ -84,7 +84,7 @@ jobs:
 
 
   # ─────────────────────────────────────────────
-  # Job 3: Deploy to OVH Kubernetes
+  # Job 3: Deploy to OVH
   # ─────────────────────────────────────────────
   deploy:
     name: Deploy to OVH Kubernetes
