@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: us-central1-docker.pkg.dev/lunar-parsec-457813-u5/test-scenerio-kloudmate/scenario-12-rolling-update-stuck:latest
+        image: REGISTRY_PLACEHOLDER/scenario-12-rolling-update-stuck:latest
         resources:
           requests:
             cpu: "100m"
