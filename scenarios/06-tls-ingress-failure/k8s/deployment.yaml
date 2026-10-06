@@ -21,6 +21,6 @@ spec:
     spec:
       containers:
         - name: app
-          image: us-central1-docker.pkg.dev/lunar-parsec-457813-u5/test-scenerio-kloudmate/scenario-06-tls-ingress-failure:latest
+          image: REGISTRY_PLACEHOLDER/scenario-06-tls-ingress-failure:latest
           ports:
             - containerPort: 8080
