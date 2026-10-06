@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: us-central1-docker.pkg.dev/lunar-parsec-457813-u5/test-scenerio-kloudmate/scenario-13-hpa-not-scaling:latest
+        image: REGISTRY_PLACEHOLDER/scenario-13-hpa-not-scaling:latest
         ports:
         - containerPort: 8080
         resources:
